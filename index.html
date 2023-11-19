@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<style>
+    .calculadora {
+        width: 28rem;
+        height: 32rem;
+    }
+</style>
+
+<body>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <main class="w-full mx-3 my-10 flex justify-center justify-items-center">
+        <div class="grid grid-cols-1 grid-rows-5 calculadora bg-slate-700 ring ring-slate-400 rounded p-3 shadow-2xl">
+            <div class="flex my-3 flex-row justify-around">
+                <input class="bg-slate-300 ring ring-4 ring-slate-400 rounded font-bold w-96 p-3 text-4xl" value="0"
+                    type="text" name="resultado" id="resultado" dir="rtl" readonly>
+            </div>
+            <div class="flex my-1 flex-row justify-around">
+                <input class="w-16 h-16  bg-slate-500 ring ring-slate-700 rounded text-white font-bold" type="button"
+                    data-role="operador" value="" disabled />
+                <input
+                    class="w-16 h-16  bg-slate-500 hover:bg-slate-400 active:bg-slate-600 ring ring-slate-600 rounded text-white font-bold"
+                    type="button" data-role="limpar" value="C" />
+                <input
+                    class="w-16 h-16  bg-slate-500 hover:bg-slate-400 active:bg-slate-600 ring ring-slate-600 rounded text-white font-bold"
+                    type="button" data-role="operador" value="%" />
+                <input
+                    class="w-16 h-16  bg-slate-500 hover:bg-slate-400 active:bg-slate-600 ring ring-slate-600 rounded text-white font-bold"
+                    type="button" data-role="operador" value="/" />
+            </div>
+            <div class="flex my-1 flex-row justify-around">
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="7" />
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="8" />
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="9" />
+                <input
+                    class="w-16 h-16  bg-slate-500 hover:bg-slate-400 active:bg-slate-600 ring ring-slate-600 rounded text-white font-bold"
+                    type="button" data-role="operador" value="X" />
+            </div>
+            <div class="flex my-1 flex-row justify-around">
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="4" />
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="5" />
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="6" />
+                <input
+                    class="w-16 h-16  bg-slate-500 hover:bg-slate-400 active:bg-slate-600 ring ring-slate-600 rounded text-white font-bold text-xl"
+                    type="button" data-role="operador" value="-" />
+            </div>
+            <div class="flex my-1 flex-row justify-around">
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="1" />
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="2" />
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="3" />
+                <input
+                    class="w-16 h-16  bg-slate-500 hover:bg-slate-400 active:bg-slate-600 ring ring-slate-600 rounded text-white font-bold text-xl"
+                    type="button" data-role="operador" value="+" />
+            </div>
+            <div class="flex my-1 flex-row justify-around">
+                <input class="w-16 h-16  bg-slate-400 ring ring-slate-700 rounded text-white font-bold" type="button"
+                    data-role="operando" value="" disabled />
+                <input
+                    class="w-16 h-16  bg-slate-400 hover:bg-slate-500 active:bg-slate-600 ring ring-slate-500 rounded text-white font-bold"
+                    type="button" data-role="operando" value="0" />
+                <input class="w-16 h-16  bg-slate-400 ring ring-slate-700 rounded text-white font-bold text-xl"
+                    type="button" data-role="operando" value="" disabled />
+                <input
+                    class="w-16 h-16  bg-cyan-500 hover:bg-cyan-600 active:bg-cyan-700 ring ring-cyan-600 rounded text-white font-bold text-xl"
+                    type="button" data-role="calcular" value="=" />
+            </div>
+        </div>
+    </main>
+    <script>
+        class Calculadora {
+            _resultado = 0;
+
+            get resultado() {
+                return this._resultado;
+            }
+
+            set resultado(valor) {
+                this._resultado = valor;
+
+                document.getElementById('resultado').value = this.resultado;
+            }
+
+            _operando = 0;
+
+            get operando() {
+                return this._operando;
+            }
+
+            set operando(valor) {
+                if (this._operando == 0 && valor == 0)
+                    return;
+
+                if (this._operando == 0) {
+
+                    this._operando = valor;
+                } else {
+
+                    this._operando = `${this._operando}${valor}`;
+                }
+
+                document.getElementById('resultado').value = this._operando;
+            }
+
+            _operador = undefined;
+
+            get operador() {
+                return this._operador;
+            }
+
+            set operador(valor) {
+                this._operador = valor;
+
+                if (this._resultado != 0) {
+
+                    this.calcular();
+                } else {
+
+                    this.resultado = this.operando;
+                }
+
+                this._operando = 0;
+
+                document.getElementById('resultado').value = 0;
+            }
+
+            limpar() {
+                this._operando = 0;
+                this._operador = undefined;
+                this._resultado = 0;
+
+                document.getElementById('resultado').value = 0;
+            }
+
+            calcular() {
+                switch (this.operador) {
+                    case '/':
+                        this.resultado = parseFloat(this.resultado) / parseFloat(this.operando);
+                        this._operando = 0;
+                        break;
+
+                    case '+':
+                        this.resultado = parseFloat(this.resultado) + parseFloat(this.operando);
+                        this._operando = 0;
+                        break;
+
+                    case '-':
+                        this.resultado = parseFloat(this.resultado) - parseFloat(this.operando);
+                        this._operando = 0;
+                        break;
+
+                    case 'X':
+                        this.resultado = parseFloat(this.resultado) * parseFloat(this.operando);
+                        this._operando = 0;
+                        break;
+
+                    case '%':
+                        this.resultado = parseFloat(this.resultado) % parseFloat(this.operando);
+                        this._operando = 0;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        let calculadora = new Calculadora();
+        document.querySelectorAll('input[data-role="operando"]').forEach(botao => botao.addEventListener('click', () => calculadora.operando = botao.value));
+        document.querySelectorAll('input[data-role="operador"]').forEach(botao => botao.addEventListener('click', () => calculadora.operador = botao.value));
+        document.querySelector('input[data-role="limpar"]').addEventListener('click', () => calculadora.limpar());
+        document.querySelector('input[data-role="calcular"]').addEventListener('click', () => calculadora.calcular());
+    </script>
+</body>
+
+</html>
